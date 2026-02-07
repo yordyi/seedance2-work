@@ -1,0 +1,115 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { buttonVariants } from '@/components/ui/button';
+import { SubscriptionService } from '@/lib/services/subscription';
+
+const { DB } = Astro.locals.runtime.env;
+const subscriptionService = new SubscriptionService(DB);
+const subscriptions = await subscriptionService.getAll();
+
+const defaultPlans = [
+  {
+    name: 'Free',
+    price: 0,
+    description: 'Get started with video generation',
+    features: [
+      '5 videos per month',
+      '480p resolution',
+      '5 second max duration',
+      'Community support',
+    ],
+    cta: 'Get Started',
+    highlighted: false,
+  },
+  {
+    name: 'Pro',
+    price: 29,
+    description: 'For creators who need more',
+    features: [
+      '50 videos per month',
+      'Up to 1080p resolution',
+      '10 second max duration',
+      'Priority processing',
+      'No watermark',
+      'Email support',
+    ],
+    cta: 'Start Pro',
+    highlighted: true,
+  },
+  {
+    name: 'Enterprise',
+    price: 99,
+    description: 'For teams and businesses',
+    features: [
+      'Unlimited videos',
+      'Up to 1080p resolution',
+      '10 second max duration',
+      'Highest priority processing',
+      'No watermark',
+      'API access',
+      'Dedicated support',
+      'Custom integrations',
+    ],
+    cta: 'Contact Sales',
+    highlighted: false,
+  },
+];
+
+const plans = subscriptions.length > 0
+  ? subscriptions.map((sub: any) => ({
+      name: sub.name,
+      price: sub.price,
+      description: sub.description,
+      features: sub.features?.map((f: any) => f.name) || [],
+      cta: 'Subscribe',
+      highlighted: false,
+    }))
+  : defaultPlans;
+---
+
+<Layout title="Pricing">
+  <div class="space-y-8">
+    <div class="text-center space-y-2">
+      <p class="text-muted-foreground max-w-2xl mx-auto">
+        Choose the plan that fits your video generation needs. All plans include access to the Seedance 2.0 model.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
+      {plans.map((plan) => (
+        <div class={`rounded-xl border bg-card text-card-foreground shadow p-6 flex flex-col ${
+          plan.highlighted ? 'ring-2 ring-primary relative' : ''
+        }`}>
+          {plan.highlighted && (
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span class="inline-flex items-center rounded-full bg-primary text-primary-foreground px-3 py-1 text-xs font-semibold">
+                Most Popular
+              </span>
+            </div>
+          )}
+          <div class="space-y-2 mb-6">
+            <h3 class="text-xl font-bold">{plan.name}</h3>
+            <p class="text-sm text-muted-foreground">{plan.description}</p>
+            <div class="flex items-baseline gap-1">
+              <span class="text-3xl font-bold">${plan.price}</span>
+              <span class="text-muted-foreground">/month</span>
+            </div>
+          </div>
+          <ul class="space-y-2 mb-6 flex-1">
+            {plan.features.map((feature: string) => (
+              <li class="flex items-start gap-2 text-sm">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary mt-0.5 shrink-0">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <a class={buttonVariants({ variant: plan.highlighted ? 'default' : 'outline', class: 'w-full' })} href="/generate">
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>

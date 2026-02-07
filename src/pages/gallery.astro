@@ -1,0 +1,22 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { VideoGallery } from '@/components/video/video-gallery';
+import { VideoTaskService } from '@/lib/services/video_task';
+import { buttonVariants } from '@/components/ui/button';
+
+const { DB } = Astro.locals.runtime.env;
+const videoTaskService = new VideoTaskService(DB);
+const tasks = await videoTaskService.getAll();
+---
+
+<Layout title="Gallery">
+  <Fragment slot="actions">
+    <a class={buttonVariants()} href="/generate">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M5 12h14"/>
+      </svg>
+      New Video
+    </a>
+  </Fragment>
+  <VideoGallery tasks={tasks} client:load />
+</Layout>

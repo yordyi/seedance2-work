@@ -1,7 +1,7 @@
 import { VideoTaskService } from "@/lib/services/video_task";
 
 export async function POST({ locals, request }) {
-  const { DB } = locals.runtime.env;
+  const { DB, VIDEO_GENERATION_WORKFLOW } = locals.runtime.env;
 
   const videoTaskService = new VideoTaskService(DB);
 
@@ -36,12 +36,24 @@ export async function POST({ locals, request }) {
 
     const task = await videoTaskService.getById(result.taskId);
 
-    // TODO: Trigger actual Seedance 2.0 API call via Cloudflare Workflow
-    // For now, the task is created with 'pending' status.
-    // In production, this would trigger a workflow that:
-    // 1. Calls the Seedance 2.0 API with the prompt
-    // 2. Polls for completion
-    // 3. Updates the task with video_url and thumbnail_url
+    // Trigger the VideoGenerationWorkflow for async processing
+    try {
+      await VIDEO_GENERATION_WORKFLOW.create({
+        id: `video-task-${result.taskId}`,
+        params: {
+          taskId: result.taskId,
+          prompt,
+          negative_prompt,
+          duration: duration || 5,
+          resolution: resolution || "720p",
+          aspect_ratio: aspect_ratio || "16:9",
+          seed,
+        },
+      });
+    } catch (workflowError) {
+      // Workflow trigger failure is non-fatal — task is still created
+      console.error("Failed to trigger workflow:", workflowError);
+    }
 
     return Response.json(
       {

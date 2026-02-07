@@ -1,5 +1,6 @@
 ---
 import { buttonVariants } from '@/components/ui/button';
+import { Header } from '@/components/Header';
 import '@/styles/globals.css'
 ---
 
@@ -32,78 +33,308 @@ import '@/styles/globals.css'
     <title>Seedance - AI Video Generation Platform</title>
     <meta name="description" content="Generate stunning videos from text prompts using Seedance 2.0 AI model. Transform your ideas into professional videos in seconds." />
   </head>
-  <body>
-    <div class="flex flex-col items-center justify-center min-h-screen gap-6 py-20 px-8">
-      <div class="flex items-center gap-3 mb-2">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
-          <polygon points="23 7 16 12 23 17 23 7" />
-          <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-        </svg>
-        <span class="text-sm font-medium text-muted-foreground tracking-widest uppercase">Seedance 2.0</span>
+  <body class="min-h-screen">
+    <!-- Navigation -->
+    <Header currentPath="/" />
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden">
+      <!-- Background gradient decoration -->
+      <div class="absolute inset-0 -z-10">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-gradient-to-br from-purple-500/20 via-pink-500/10 to-transparent rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gradient-to-tl from-blue-500/10 to-transparent rounded-full blur-3xl"></div>
       </div>
 
-      <h1 class="text-5xl md:text-6xl font-bold text-center max-w-3xl leading-tight">
-        Transform Text into <span class="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Stunning Videos</span>
-      </h1>
+      <div class="max-w-6xl mx-auto px-6 pt-20 pb-24 text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border bg-background/80 backdrop-blur-sm mb-8">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+          </span>
+          <span class="text-sm font-medium">Powered by Seedance 2.0 Model</span>
+        </div>
 
-      <p class="text-xl text-muted-foreground text-center max-w-2xl">
-        Powered by the Seedance 2.0 AI model. Enter a text prompt and watch your ideas come to life as professional-quality videos.
-      </p>
+        <!-- Headline -->
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight max-w-4xl mx-auto leading-[1.1] mb-6">
+          Turn Your Words into
+          <span class="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 bg-clip-text text-transparent"> Cinematic Videos</span>
+        </h1>
 
-      <div class="flex flex-wrap justify-center gap-4 mt-4">
-        <a class={buttonVariants({ size: 'lg' })} href="/generate">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
-            <path d="M12 5v14M5 12h14"/>
+        <!-- Subheadline -->
+        <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+          Describe any scene, style, or story. Seedance 2.0 generates professional-quality videos from text in seconds — no editing skills required.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+          <a class={buttonVariants({ size: 'lg', class: 'h-12 px-8 text-base' })} href="/generate">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Start Creating — Free
+          </a>
+          <a class={buttonVariants({ variant: 'outline', size: 'lg', class: 'h-12 px-8 text-base' })} href="/gallery">
+            Explore Gallery
+          </a>
+        </div>
+
+        <p class="text-sm text-muted-foreground">No credit card required. 5 free videos to start.</p>
+
+        <!-- Demo prompt preview -->
+        <div class="max-w-2xl mx-auto mt-14 rounded-xl border bg-card/50 backdrop-blur-sm shadow-lg overflow-hidden">
+          <div class="flex items-center gap-2 px-4 py-2.5 border-b bg-muted/50">
+            <div class="flex gap-1.5">
+              <div class="w-3 h-3 rounded-full bg-red-500/60"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
+            </div>
+            <span class="text-xs text-muted-foreground ml-2">seedance2.work/generate</span>
+          </div>
+          <div class="p-6 text-left space-y-3">
+            <div class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Prompt</div>
+            <p class="text-sm leading-relaxed">
+              <span class="text-foreground">"A lone astronaut walking across a vast Martian desert at sunset, </span>
+              <span class="text-purple-500 dark:text-purple-400">cinematic aerial drone shot</span>
+              <span class="text-foreground">, dust particles catching </span>
+              <span class="text-pink-500 dark:text-pink-400">golden hour light</span>
+              <span class="text-foreground">, </span>
+              <span class="text-orange-500 dark:text-orange-400">4K ultra-realistic</span>
+              <span class="text-foreground">, Ridley Scott style"</span>
+            </p>
+            <div class="flex items-center gap-4 pt-2">
+              <span class="text-xs text-muted-foreground">1080p</span>
+              <span class="text-xs text-muted-foreground">16:9</span>
+              <span class="text-xs text-muted-foreground">5s</span>
+              <div class="ml-auto">
+                <span class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/30 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:text-green-400">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-1">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Ready in ~30s
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="border-t bg-muted/30">
+      <div class="max-w-6xl mx-auto px-6 py-24">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Everything You Need to Create</h2>
+          <p class="text-muted-foreground text-lg max-w-xl mx-auto">Seedance 2.0 combines state-of-the-art video generation with an intuitive platform.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Feature 1 -->
+          <div class="rounded-xl border bg-card p-6 space-y-3 hover:shadow-md transition-shadow">
+            <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600 dark:text-purple-400">
+                <path d="M12 20h9"/>
+                <path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lg">Text-to-Video</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">Simply describe your scene in natural language. Our AI understands complex prompts including camera angles, lighting, and artistic styles.</p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="rounded-xl border bg-card p-6 space-y-3 hover:shadow-md transition-shadow">
+            <div class="w-10 h-10 rounded-lg bg-pink-100 dark:bg-pink-900/30 flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-600 dark:text-pink-400">
+                <path d="m13 2-2 2.5h3L12 7"/>
+                <path d="M10 14v-3"/>
+                <path d="M14 14v-3"/>
+                <path d="M11 19c-1.7 0-3-1.3-3-3v-2h8v2c0 1.7-1.3 3-3 3z"/>
+                <path d="M12 22v-3"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lg">Lightning Fast</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">Optimized pipeline delivers results in seconds, not hours. Powered by Cloudflare's global edge network for minimal latency worldwide.</p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="rounded-xl border bg-card p-6 space-y-3 hover:shadow-md transition-shadow">
+            <div class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600 dark:text-orange-400">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lg">Multiple Resolutions</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">Export in 480p, 720p, or full 1080p HD. Choose from landscape, portrait, or square aspect ratios for any platform.</p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="rounded-xl border bg-card p-6 space-y-3 hover:shadow-md transition-shadow">
+            <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 dark:text-blue-400">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                <polyline points="16 6 12 2 8 6"/>
+                <line x1="12" y1="2" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lg">Negative Prompts</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">Fine-tune your output by specifying what to avoid — remove blur, watermarks, distortions, or unwanted elements with precision.</p>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="rounded-xl border bg-card p-6 space-y-3 hover:shadow-md transition-shadow">
+            <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 dark:text-green-400">
+                <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lg">Reproducible Seeds</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">Set a seed value to reproduce the exact same video. Perfect for iterating on a concept while keeping consistency.</p>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="rounded-xl border bg-card p-6 space-y-3 hover:shadow-md transition-shadow">
+            <div class="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-600 dark:text-indigo-400">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lg">REST API Access</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">Integrate video generation into your own apps with our documented REST API. Build automated video pipelines at scale.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="border-t">
+      <div class="max-w-6xl mx-auto px-6 py-24">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Built for Every Creator</h2>
+          <p class="text-muted-foreground text-lg max-w-xl mx-auto">From social media to enterprise — see how creators use Seedance.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="rounded-xl border bg-card overflow-hidden hover:shadow-md transition-shadow">
+            <div class="aspect-[2/1] bg-gradient-to-br from-purple-500/20 via-pink-500/10 to-orange-500/20 flex items-center justify-center">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </div>
+            <div class="p-6">
+              <h3 class="font-semibold text-lg mb-2">Social Media Content</h3>
+              <p class="text-sm text-muted-foreground leading-relaxed">Create scroll-stopping Reels, TikToks, and YouTube Shorts. Generate b-roll, intros, and transitions that boost engagement.</p>
+            </div>
+          </div>
+
+          <div class="rounded-xl border bg-card overflow-hidden hover:shadow-md transition-shadow">
+            <div class="aspect-[2/1] bg-gradient-to-br from-blue-500/20 via-cyan-500/10 to-green-500/20 flex items-center justify-center">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            </div>
+            <div class="p-6">
+              <h3 class="font-semibold text-lg mb-2">Marketing & Ads</h3>
+              <p class="text-sm text-muted-foreground leading-relaxed">Produce professional product videos, explainer content, and ad creatives without a camera crew or post-production budget.</p>
+            </div>
+          </div>
+
+          <div class="rounded-xl border bg-card overflow-hidden hover:shadow-md transition-shadow">
+            <div class="aspect-[2/1] bg-gradient-to-br from-orange-500/20 via-red-500/10 to-pink-500/20 flex items-center justify-center">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50">
+                <polygon points="23 7 16 12 23 17 23 7"/>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+              </svg>
+            </div>
+            <div class="p-6">
+              <h3 class="font-semibold text-lg mb-2">Film & Storyboarding</h3>
+              <p class="text-sm text-muted-foreground leading-relaxed">Visualize scenes before filming. Create animated storyboards, concept reels, and pre-visualization for your next production.</p>
+            </div>
+          </div>
+
+          <div class="rounded-xl border bg-card overflow-hidden hover:shadow-md transition-shadow">
+            <div class="aspect-[2/1] bg-gradient-to-br from-green-500/20 via-teal-500/10 to-blue-500/20 flex items-center justify-center">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
+              </svg>
+            </div>
+            <div class="p-6">
+              <h3 class="font-semibold text-lg mb-2">Education & Training</h3>
+              <p class="text-sm text-muted-foreground leading-relaxed">Generate visual explanations, training simulations, and educational content that makes complex concepts easy to understand.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="border-t bg-muted/30">
+      <div class="max-w-4xl mx-auto px-6 py-16">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-3xl md:text-4xl font-bold">2.0</div>
+            <div class="text-sm text-muted-foreground mt-1">Model Version</div>
+          </div>
+          <div>
+            <div class="text-3xl md:text-4xl font-bold">1080p</div>
+            <div class="text-sm text-muted-foreground mt-1">Max Resolution</div>
+          </div>
+          <div>
+            <div class="text-3xl md:text-4xl font-bold">~30s</div>
+            <div class="text-sm text-muted-foreground mt-1">Generation Time</div>
+          </div>
+          <div>
+            <div class="text-3xl md:text-4xl font-bold">10s</div>
+            <div class="text-sm text-muted-foreground mt-1">Max Duration</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="border-t">
+      <div class="max-w-3xl mx-auto px-6 py-24 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Ready to Create?</h2>
+        <p class="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
+          Start generating stunning videos from text in seconds. No signup required for your first 5 videos.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a class={buttonVariants({ size: 'lg', class: 'h-12 px-8 text-base' })} href="/generate">
+            Generate Your First Video
+          </a>
+          <a class={buttonVariants({ variant: 'outline', size: 'lg', class: 'h-12 px-8 text-base' })} href="/pricing">
+            View Pricing
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t">
+      <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2 text-sm text-muted-foreground">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="23 7 16 12 23 17 23 7" />
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
           </svg>
-          Start Generating
-        </a>
-        <a class={buttonVariants({ variant: 'outline', size: 'lg' })} href="/gallery">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
-            <rect x="3" y="3" width="7" height="7" />
-            <rect x="14" y="3" width="7" height="7" />
-            <rect x="14" y="14" width="7" height="7" />
-            <rect x="3" y="14" width="7" height="7" />
-          </svg>
-          View Gallery
-        </a>
-        <a class={buttonVariants({ variant: 'outline', size: 'lg' })} href="/pricing">
-          Pricing
-        </a>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-4xl w-full">
-        <div class="text-center space-y-2">
-          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-muted">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-              <circle cx="12" cy="13" r="3"/>
-            </svg>
-          </div>
-          <h3 class="font-semibold">Text to Video</h3>
-          <p class="text-sm text-muted-foreground">Describe your scene and our AI generates high-quality video content</p>
+          Seedance &copy; 2026. Powered by Seedance 2.0 on Cloudflare.
         </div>
-        <div class="text-center space-y-2">
-          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-muted">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
-          </div>
-          <h3 class="font-semibold">Fast Generation</h3>
-          <p class="text-sm text-muted-foreground">Generate videos in seconds with our optimized Seedance 2.0 pipeline</p>
-        </div>
-        <div class="text-center space-y-2">
-          <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-muted">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-          </div>
-          <h3 class="font-semibold">Easy Export</h3>
-          <p class="text-sm text-muted-foreground">Download your videos in multiple resolutions and aspect ratios</p>
+        <div class="flex items-center gap-6 text-sm text-muted-foreground">
+          <a href="/dashboard" class="hover:text-foreground transition-colors">Dashboard</a>
+          <a href="/generate" class="hover:text-foreground transition-colors">Generate</a>
+          <a href="/gallery" class="hover:text-foreground transition-colors">Gallery</a>
+          <a href="/pricing" class="hover:text-foreground transition-colors">Pricing</a>
         </div>
       </div>
-    </div>
+    </footer>
   </body>
 </html>
